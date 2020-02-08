@@ -19,8 +19,8 @@ public class Main {
         Scanner scanner = new Scanner(fileReader);
         StringBuilder tlvString = new StringBuilder("");
         while (scanner.hasNext()) {
-//            tlvString.append(scanner.nextLine());
-            tlvString.append(scanner.nextInt(32));
+            tlvString.append(scanner.nextLine());
+//            byte t =  scanner.nextByte(16);
             if (scanner.hasNext())
                 tlvString.append(" ");
         }
@@ -42,6 +42,9 @@ public class Main {
                 case 1:
                     dateTime = getData(i, length);
                     System.out.println("date - " + dateTime);
+                    dateTime = dateTime.replaceAll(" ","");
+                    System.out.println("date - " + dateTime);
+                    System.out.println("date - " + Integer.parseUnsignedInt(dateTime,16));
                     break;
                 case 2:
                     orderNumber = getData(i, length);
@@ -87,8 +90,8 @@ public class Main {
 
     private static String getData(int indStart, int length) {
         StringBuilder data = new StringBuilder();
-        for (int i = 0; i < length; i++) {
-            data.append(massString[indStart + i]).append(" ");
+        for (int i = length + indStart-1; i >= indStart; i--) {
+            data.append(massString[i]).append(" ");
         }
         return data.toString();
     }
