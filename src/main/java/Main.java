@@ -3,11 +3,13 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.lang.Object;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.logging.FileHandler;
 
 public class Main {
     static String[] massString;
+    ArrayList<Order> orders;
 
     public static void main(String[] args) throws Exception {
         String f = "test.TLV";
@@ -17,7 +19,8 @@ public class Main {
         Scanner scanner = new Scanner(fileReader);
         StringBuilder tlvString = new StringBuilder("");
         while (scanner.hasNext()) {
-            tlvString.append(scanner.nextLine());
+//            tlvString.append(scanner.nextLine());
+            tlvString.append(scanner.nextInt(32));
             if (scanner.hasNext())
                 tlvString.append(" ");
         }
