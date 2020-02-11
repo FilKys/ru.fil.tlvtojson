@@ -1,16 +1,9 @@
 public class Item {
 
     private String name;
-    private Integer price;
+    private Long price;
     private Float quantity;
-    private Integer sum;
-
-    public Item (String name, Integer price, Float quantity, Integer sum){
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
-        this.sum = sum;
-    }
+    private Long sum;
 
     public Item(){}
 
@@ -18,7 +11,7 @@ public class Item {
         this.name = name;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Long price) {
         this.price = price;
     }
 
@@ -26,7 +19,7 @@ public class Item {
         this.quantity = quantity;
     }
 
-    public void setSum(Integer sum) {
+    public void setSum(Long sum) {
         this.sum = sum;
     }
 
@@ -34,7 +27,7 @@ public class Item {
         return name;
     }
 
-    public Integer getPrice() {
+    public Long getPrice() {
         return price;
     }
 
@@ -42,7 +35,7 @@ public class Item {
         return quantity;
     }
 
-    public Integer getSum() {
+    public Long getSum() {
         return sum;
     }
 }

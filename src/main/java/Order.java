@@ -7,14 +7,7 @@ public class Order {
     private String customerName;
     private ArrayList<Item> items;
 
-    public Order(Date dataTime, Long orderNumber, String customerName) {
-        this.dataTime = dataTime;
-        this.orderNumber = orderNumber;
-        this.customerName = customerName;
-        items = new ArrayList<>();
-    }
-
-    public Order(){
+    public Order() {
         items = new ArrayList<>();
     }
 
@@ -30,8 +23,8 @@ public class Order {
         this.customerName = customerName;
     }
 
-    public void setItems(ArrayList<Item> items) {
-        this.items = items;
+    public void setItem(Item items) {
+        this.items.add(items);
     }
 
     public Date getDataTime() {
@@ -48,5 +41,9 @@ public class Order {
 
     public ArrayList<Item> getItems() {
         return items;
+    }
+
+    public void clearItems() {
+        items = new ArrayList<>();
     }
 }
