@@ -3,7 +3,7 @@ import java.util.Date;
 
 public class Order {
     private Date dataTime;
-    private Long orderNumber;
+    private Integer orderNumber;
     private String customerName;
     private ArrayList<Item> items;
 
@@ -15,7 +15,7 @@ public class Order {
         this.dataTime = dataTime;
     }
 
-    public void setOrderNumber(Long orderNumber) {
+    public void setOrderNumber(Integer orderNumber) {
         this.orderNumber = orderNumber;
     }
 
@@ -31,7 +31,7 @@ public class Order {
         return dataTime;
     }
 
-    public Long getOrderNumber() {
+    public Integer getOrderNumber() {
         return orderNumber;
     }
 

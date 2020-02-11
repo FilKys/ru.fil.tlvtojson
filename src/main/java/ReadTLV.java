@@ -20,7 +20,7 @@ public class ReadTLV {
                     tlvString.append(" ");
             }
         } catch (Exception e) {
-            System.err.println("ERROR read file "+in);
+            System.err.println("ERROR read file " + in);
         }
         massString = tlvString.toString().split(" ");
         Order order = new Order();
@@ -41,12 +41,18 @@ public class ReadTLV {
 //                        System.out.println("date - " + order.getDataTime().toGMTString());
                     break;
                 case 2:
-                    order.setOrderNumber((long) Integer.parseUnsignedInt(getData(i, length)
+                    order.setOrderNumber(Integer.parseUnsignedInt(getData(i, length)
                             .replaceAll(" ", ""), 16));
+                    if (String.valueOf(Math.abs(order.getOrderNumber())).length() > 8) {
+                        throw new Exception("ERROR!! Length order number > 8");
+                    }
 //                        System.out.println("orderNumber - " + order.getOrderNumber());
                     break;
                 case 3:
                     order.setCustomerName(getString(getData(i, length)));
+                    if (order.getCustomerName().length() > 1000) {
+                        throw new Exception("ERROR!! Length customer name > 1000");
+                    }
 //                        System.out.println("customerName - " + order.getCustomerName());
                     break;
                 case 4:
@@ -62,6 +68,9 @@ public class ReadTLV {
                         item = new Item();
                     }
                     item.setName(getString(getData(i, length)));
+                    if (item.getName().length() > 200) {
+                        throw new Exception("ERROR!! Length item name > 200");
+                    }
 //                        System.out.println("name - " + item.getName());
                     break;
                 case 12:
@@ -71,6 +80,9 @@ public class ReadTLV {
                     }
                     item.setPrice(Long.parseUnsignedLong(
                             getData(i, length).replaceAll(" ", ""), 16));
+                    if (String.valueOf(Math.abs(item.getPrice())).length() > 6) {
+                        throw new Exception("ERROR!! Length item price > 6");
+                    }
 //                        System.out.println("price - " + item.getPrice());
                     break;
                 case 13:
@@ -80,6 +92,9 @@ public class ReadTLV {
                     }
                     item.setQuantity((float) Integer.parseUnsignedInt(getData(i, length)
                             .replaceAll(" ", "")) / 100);
+                    if (String.valueOf(Math.abs(item.getQuantity())).length() > 8) {
+                        throw new Exception("ERROR!! Length item quantity > 8");
+                    }
 //                        System.out.println("quantity - " + item.getQuantity());
                     break;
                 case 14:
@@ -87,7 +102,11 @@ public class ReadTLV {
                         order.setItem(item);
                         item = new Item();
                     }
-                    item.setSum(Long.parseUnsignedLong(getData(i, length).replaceAll(" ", ""), 16));
+                    item.setSum(Long.parseUnsignedLong(
+                            getData(i, length).replaceAll(" ", ""), 16));
+                    if (String.valueOf(Math.abs(item.getSum())).length() > 6) {
+                        throw new Exception("ERROR!! Length item quantity > 6");
+                    }
 //                        System.out.println("sum - " + item.getSum());
                     break;
             }
