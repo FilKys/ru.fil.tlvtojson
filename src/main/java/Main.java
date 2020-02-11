@@ -1,5 +1,6 @@
 import java.io.*;
 import java.lang.Object;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
@@ -60,20 +61,23 @@ public class Main {
                     length = 0;
                     break;
                 case 11:
-                    name = getData(i, length);
+                    name = getString(getData(i, length));
                     System.out.println("name - " + name);
                     break;
                 case 12:
-                    price = getData(i, length);
-                    System.out.println("price - " + price);
+                    price = getData(i, length).replaceAll(" ", "");
+                    orderNumberInt = Integer.parseUnsignedInt(price, 16);
+                    System.out.println("price - " + orderNumberInt);
                     break;
                 case 13:
-                    quantity = getData(i, length);
-                    System.out.println("quantity - " + quantity);
+                    quantity = getData(i, length).replaceAll(" ", "");
+                    orderNumberInt = Integer.parseUnsignedInt(quantity, 16);
+                    System.out.println("quantity - " + orderNumberInt);
                     break;
                 case 14:
-                    sum = getData(i, length);
-                    System.out.println("sum - " + sum);
+                    sum = getData(i, length).replaceAll(" ", "");
+                    orderNumberInt = Integer.parseUnsignedInt(sum, 16);
+                    System.out.println("sum - " + orderNumberInt);
                     break;
             }
             i += length;
@@ -97,17 +101,11 @@ public class Main {
 
     private static String getString(String binaryStr) throws UnsupportedEncodingException {
         String[] binaryMass = binaryStr.split(" ");
-        StringBuilder stringBuilder = new StringBuilder("");
-        for (String letter : binaryMass) {
-            stringBuilder.append((char) (byte) letter);
-            System.out.println(stringBuilder);
-//            stringBuilder.append( Integer.toBinaryString(Integer.parseInt(letter,16))).append(" ");
+        Charset ch = Charset.forName("CP866");
+        byte[] h = new byte[binaryMass.length];
+        for (int i=1; i<=binaryMass.length;i++) {
+            h[binaryMass.length-i] = (byte) Integer.parseInt(binaryMass[i-1], 16);
         }
-        return stringBuilder.toString();
-
-//        binaryStr = binaryStr.replaceAll(" ", "");
-//        byte[] bytes = binaryStr.getBytes();
-//        binaryStr = new String(bytes, "UTF-16");
-//        return binaryStr
+        return new String(h, ch);
     }
 }
